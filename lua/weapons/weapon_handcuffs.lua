@@ -157,8 +157,15 @@ function SWEP:Tie(tr)
 				owner:ChatPrint("Threat handcuffed.")
 				if ent:IsPlayer() then
 					if IsValid(ent:GetActiveWeapon()) then
-						if ent:GetActiveWeapon():GetClass() ~= "weapon_hands_sh" or "weapon_handcuffs_key" then
-							ent:DropWeapon()
+						local activewep = ent:GetActiveWeapon()
+						if activewep:GetClass() ~= "weapon_hands_sh" or "weapon_handcuffs_key" then
+							if ent:HasWeapon("weapon_hands_sh") then
+								local hands = "weapon_hands_sh"
+								ent:SelectWeapon(hands)
+							else
+								local hands = ent:Give("weapon_hands_sh")
+								ent:SelectWeapon(hands)
+							end
 						end
 					end
 				end
@@ -185,7 +192,6 @@ function SWEP:Tie(tr)
 				end
 			end
 		end
-	--end)
 end
 
 if SERVER then
