@@ -18,14 +18,14 @@ end
 SWEP.SprayRand = {Angle(0, 0, 0), Angle(0, 0, 0)}
 SWEP.addSprayMul = 1
 
-SWEP.RecoilMul = 0.8
+SWEP.RecoilMul = 1
 
 local cos, sin, math_max, math_min = math.cos, math.sin, math.max, math.min
 
 local hg_recoilmul = CreateConVar("hg_recoilmul", 1, {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Multiply weapon physical recoil")
 function SWEP:GetPrimaryMul()
 	local owner = self:GetOwner()
-	local mul = ((0.5) + math_max(self.Primary.Force / 110 - 1, 0)) * (owner.Crouching and owner:Crouching() and self.CrouchMul or 1) * (self.attachments and self.attachments.barrel and self.attachments.barrel[1] ~= "empty" and 0.75 or 1)
+	local mul = ((1.5) + math_max(self.Primary.Force / 110 - 1, 0)) * (owner.Crouching and owner:Crouching() and self.CrouchMul or 1) * (self.attachments and self.attachments.barrel and self.attachments.barrel[1] ~= "empty" and 0.75 or 1)
 	self:ApplyForce(mul)
 	mul = ((mul or 0) * (self.Supressor and 0.75 or 1) * (owner.organism and owner.organism.recoilmul or 1)) * hg_recoilmul:GetFloat()
 	return mul
@@ -203,7 +203,7 @@ end
 	function SWEP:ApplyEyeSpray(value) end
 	function SWEP:ApplyEyeSprayVel(value) end
 end--]]
-SWEP.ZoomFOV = 20
+SWEP.ZoomFOV = 0
 function SWEP:AdjustMouseSensitivity()
 	--return self:IsZoom() and self:HasAttachment("sight") and (math.min(self.ZoomFOV / 10, 0.5) or 0.5) or 1
 end
