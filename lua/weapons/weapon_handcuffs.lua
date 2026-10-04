@@ -101,7 +101,6 @@ end
 function SWEP:Initialize()
 	self:SetHold(self.HoldType)
 end
-
 local function handcuff(ragdoll)
 	local body = ragdoll:GetPhysicsObjectNum(0)
 	local lh = ragdoll:GetPhysicsObjectNum(hg.realPhysNum(ragdoll,5))
@@ -143,7 +142,7 @@ function SWEP:Tie(tr)
 				local criswat = zb and zb.CROUND == "criresp" and self:GetOwner():Team() == 0
 
 				local victim = hg.RagdollOwner(ent)
-				local owner = self:GetOwwner()
+				local owner = self:GetOwner()
 
 				if not IsValid(owner:GetActiveWeapon()) or IsValid(owner:GetActiveWeapon()) and owner:GetActiveWeapon() ~= self then
 					return -- you could just fool your enemy by switching your weapon while trace was active then end up tying them
